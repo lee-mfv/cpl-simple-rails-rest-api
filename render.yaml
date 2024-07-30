@@ -1,0 +1,25 @@
+databases:
+  - name: lee-rails-rest-api
+    databaseName: lee_rails_rest_api
+    user: lee_rails_rest_api_user
+    plan: free
+
+services:
+  - type: web
+    name: lee-rails-rest-api
+    runtime: ruby
+    plan: free
+    # buildCommand: "./bin/render-build.sh"
+    buildCommand: "./render-build.sh"
+    # preDeployCommand: "bundle exec rails db:migrate" # preDeployCommand only available on paid instance types
+    # startCommand: "bundle exec rails server"
+    startCommand: "bundle exec rails s"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: lee-rails-rest-api
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: WEB_CONCURRENCY
+        value: 2 # sensible default

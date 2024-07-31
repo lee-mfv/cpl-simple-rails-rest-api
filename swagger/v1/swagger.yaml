@@ -8,7 +8,7 @@ servers:
   - url: http://localhost:3000
     description: localhost for connection.
   - url: https://payrollvn-753d9468206b.herokuapp.com
-    description: Production for connection via internal network.
+    description: Testing for connection via internal network.
     variables:
       basePath:
         default: https://payrollvn-753d9468206b.herokuapp.com

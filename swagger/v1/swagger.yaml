@@ -1,0 +1,118 @@
+openapi: 3.0.1
+info:
+  version: 1.0.0
+  title: Internal API
+  description: >
+    API documentation for the QA team.
+servers:
+  - url: http://localhost:3000
+    description: localhost for connection.
+  - url: https://payrollvn-753d9468206b.herokuapp.com
+    description: Production for connection via internal network.
+    variables:
+      basePath:
+        default: https://payrollvn-753d9468206b.herokuapp.com
+components:
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >
+        Enter the token with the Bearer prefix, e.g., "Bearer abcde12345".
+paths:
+  /auth/login:
+    post:
+      summary: API to get token authorization
+      tags:
+        - api
+      description: API to login
+      parameters:
+        - name: username
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                required:
+                  - token
+              examples:
+                example-1:
+                  value: { token: "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE3MjI1MDg2ODh9.YW2I0jh9NWChXOTN9yNn8jxlitn6UqyQnobm7prK7cA" }
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                example-1:
+                  value: { "errors": "unauthorized" }
+  /api/v1/users:
+    get:
+      security:
+        - Bearer: []
+      summary: API to get users' information
+      tags:
+        - api
+      description: API to get users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  username:
+                    type: string
+                  password_digest:
+                    type: string
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+                  admin:
+                    type: boolean
+                required:
+                  - id
+                  - username
+                  - password_digest
+                  - created_at
+                  - updated_at
+                  - admin
+              examples:
+                example-1:
+                  value: [
+                    {
+                      "id": 1,
+                      "username": "Joshua 1",
+                      "password_digest": "$2a$12$aAvO7mcxXMLXvQmZjjXdp.7qeceXT/aA7QjlthCnXAOXc3mYmjnyO",
+                      "created_at": "2024-07-30T08:23:21.810Z",
+                      "updated_at": "2024-07-30T08:23:21.810Z",
+                      "admin": false
+                    }
+                  ]
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                example-1:
+                  value: { "errors": "Signature verification failed" }

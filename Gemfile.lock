@@ -66,6 +66,8 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    addressable (2.8.7)
+      public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.2)
     bcrypt (3.1.18)
     bootsnap (1.12.0)
@@ -87,6 +89,8 @@ GEM
     io-console (0.5.11)
     irb (1.4.1)
       reline (>= 0.3.0)
+    json-schema (4.3.1)
+      addressable (>= 2.8)
     jwt (2.4.1)
     lefthook (0.7.7)
     loofah (2.18.0)
@@ -127,6 +131,7 @@ GEM
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
+    public_suffix (6.0.1)
     puma (5.6.4)
       nio4r (~> 2.0)
     pundit (2.2.0)
@@ -186,6 +191,21 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.11.0)
+    rswag (2.13.0)
+      rswag-api (= 2.13.0)
+      rswag-specs (= 2.13.0)
+      rswag-ui (= 2.13.0)
+    rswag-api (2.13.0)
+      activesupport (>= 3.1, < 7.2)
+      railties (>= 3.1, < 7.2)
+    rswag-specs (2.13.0)
+      activesupport (>= 3.1, < 7.2)
+      json-schema (>= 2.2, < 5.0)
+      railties (>= 3.1, < 7.2)
+      rspec-core (>= 2.14)
+    rswag-ui (2.13.0)
+      actionpack (>= 3.1, < 7.2)
+      railties (>= 3.1, < 7.2)
     rubocop (1.31.0)
       parallel (~> 1.10)
       parser (>= 3.1.0.0)
@@ -212,6 +232,7 @@ GEM
 PLATFORMS
   arm64-darwin-23
   x86_64-darwin-21
+  x86_64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
@@ -227,6 +248,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 7.0.2, >= 7.0.2.2)
   rspec-rails
+  rswag
   rubocop (~> 1.26)
   tzinfo-data
 
